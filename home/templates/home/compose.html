@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style3.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+   
+<body onmousedown=" WhichButtonCompose(event)">
+    <nav class="navbar">
+        <label class="logo">My eVoice</label>
+        <button class="logout-btn">Logout</button>
+    </nav> 
+   <form id="here">
+    <script> 
+        $(document).ready(function(){
+        setInterval(function(){
+              $("#here").load(window.location.href + " #here" );
+        }, 20000);
+        });
+        </script>
+        {% csrf_token %}
+      <fieldset>
+         <legend>Compose Email</legend>
+            <label for="email">To:</label>
+            <input type="text" placeholder="johndoe@gmail.com" class="no-outline" id="email" required value="{{compose.recipient}}" height="70"><br /><br />
+            <label>Subject:</label>
+            <input type="text" placeholder="default text" class="no-outline" id="subject" required value="{{compose.subject}}"><br/><br />
+            <label>Message:</label>
+            <input type="text" placeholder="default text" id="body" required value ="{{compose.body}}"><br/><br/>
+      
+            <input type="submit" id="send" value="Send">
+         
+   </fieldset>
+   </form>
+   <script>
+	function WhichButtonCompose(event){
+		$.ajax({
+        url: "{% url 'home:compose' %}",
+        method: 'POST',
+        data: { 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+        success: function (data) {
+			if(data.result == 'success'){
+				window.location = "{% url 'home:options' %}";
+			}
+			else if(data.result == 'failure'){
+				window.location = "{% url 'home:compose' %}";
+			}
+        }
+    });
+	}
+</script>
+</body>
+</html>

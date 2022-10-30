@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background: conic-gradient(from -.5turn at bottom right, deeppink, cyan, rebeccapurple);
+    height: 100vh;
+    overflow: hidden;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
+    padding: 10px 20px;
+    background: #000046;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+label.logo {
+    color: white;
+    font-size: 25px;
+    line-height: 40px;
+    padding: 0 15px;
+    font-weight: bold;
+}
+.logout-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: white;
+    width: 15%;
+    border-radius: 15px;
+    border: none;
+}
+
+input {
+    width: 100%;
+    background-color: #fff;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+.no-outline:focus {
+        outline: none;
+}    
+
+.input[type="text"] {
+  width: 100%;
+  background-color: #ffffff;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+legend {
+    margin: auto;
+    color: black;
+    background-color: rgb(74, 177, 255);
+    border-color: black;
+    padding: 5px 10px;
+    font-size: xx-large;
+  }
+fieldset{
+    top: 90%;
+    margin: auto;
+    width: 80%;
+    height: 500px;
+    border: solid 5px #055387;
+    background-color:whitesmoke!important;
+    border-radius: 1px;
+}
+label {
+    font-size: x-large;
+
+}
+input[type="submit"] {
+    width: 10%;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid;
+    background: #2691d9;
+    font-size: 18px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="submit"]:hover {
+    border-color: #2691d9;
+    transition: .5s;
+}

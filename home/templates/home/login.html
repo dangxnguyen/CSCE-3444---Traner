@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Login</title>
+</head>
+<body onmousedown="SendPostRequestHome(event)">
+    <nav class="navbar">
+        <label class="logo">My eVoice</label>
+        <label class="logo">Help</label>     
+    </nav> 
+    <h1>Login</h1>
+    <div class="container">
+        <form action="home/login.html" method="POST">
+            <script> 
+                $(document).ready(function(){
+                setInterval(function(){
+                      $("#here").load(window.location.href + " #here" );
+                }, 1000);
+                });
+            </script>
+
+            {% csrf_token %}
+            <div class="userInput">
+                <input type="text" name="email" required value={{detail.email}}>
+                <span></span>
+                <label>Email</label>
+            </div>
+            <div class="userInput">
+                <input type="password" name="password" required value={{detail.password}}>
+                <span></span>
+                <label>Password</label> 
+            </div>
+            <a href="options.html">
+                <input href="options.html" type="submit" value="Login" id="login">
+            </a>
+        </form>
+    </div>
+    <script>
+        function SendPostRequestHome(event){
+			$.ajax({
+				url: "{% url 'home:login' %}",
+				method: 'POST',
+				data: { 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+				success: function (data) {
+					
+					if(data.result == 'success'){
+						
+						window.location = "{% url 'home:options' %}";
+					}
+					else if(data.result == 'failure'){
+						window.location = "{% url 'home:login' %}";
+					}
+				}
+			});
+		}
+    </script>
+</body>
+</html>

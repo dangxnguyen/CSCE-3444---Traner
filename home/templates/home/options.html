@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+    <title>Menu</title>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <nav>
+                <label class="logo">My eVoice</label>
+                <button class="logout-btn">Logout</button>
+            </nav>
+        </div>
+        <div>
+            <h1>Menu Aide</h1>
+        </div>
+        <div class="option">
+            <a href="compose.html">
+                <button href="compose.html" class="btn" value="compose">Compose</button>
+            </a>
+            <button class="btn">Inbox</button>
+            <button class="btn">Search</button>
+            <button class="btn">Trash</button>
+        </div>
+    </div>
+    <script>
+        function SendPostRequestOptions(event){
+            $.ajax({
+            url: "{% url 'home:options' %}",
+            method: 'POST',
+            data: { 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            success: function (data) {
+                if(data.result == 'compose'){
+                    window.location = "{% url 'home:compose' %}";
+                } 
+                else if(data.result == 'failure'){
+                    window.location = "{% url 'home:options' %}";
+                }
+            }
+        });
+        }
+        </script>
+
+</body>
+</html>

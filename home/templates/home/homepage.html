@@ -1,0 +1,64 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traner | First version</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style4.css' %}">
+</head>
+<body>
+  <header>
+    <a href="#" class="logo">TEAM TRANER</a>
+    <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#sec">About</a></li>
+        <li><a href="login.html">Login</a></li>
+    </ul>
+</header>  
+<section>
+    <img src="stars.png" id="stars">
+    <img src="sun.png" id="sun">
+    <img src="mountain1.png" id="mountain1">
+    <h2 id ="text">MY eVOICE</h2>
+    <a href="#sec" id="btn">LEARN MORE</a>
+    <img src="mountain2.png" id="mountain2">
+</section>
+<div class="sec" id="sec">
+    <h2>DESIGN RATIONALE</h2>
+    <p> The design for our email visual voice assistant, My eVoice webpage began by making the login page, this allows the user to gain access into our web application by entering their email and password. This removes and prevents complexity to make our web app easier to access. If the user does not have an account they can click “Create Account” which will redirect them to gmail.com, so they may create an account there.
+        <br><br>Once the user is logged in, they will be sent to our aide menu page, where a set of big buttons will be displayed so the user may perform actions. They have the ability to be sent to another page which will be the typical email view. We chose to display the simpler menu option first because the goal of our site was to make tools for those with visual disabilities, it was the best option to display the more visually accessible and fully voice automated page menu first. The aide menu aske the user whether they want to compose a message, read inbox, search for email, or trash an email, they also have the option to go to the regular email page. We decided to add a help button in each page to provide clarification on any questions the user may have for the page, this will simplify the users experience, so they will not be confused on how to use our site and its components.        
+        <br><br>On the main site we will have the available menu options on the left hand side of the page. This allows the user to clearly distinguish the options and the display of each option which will typically be on the right.        
+        <br><br>The write a letter page/option will let the subject compose a letter. They will be able to enter the recipient address, the subject, and the body of the message. They will also have the option to perform other things on the message they compose.        
+        <br><br>The inbox page will let the user see their emails. They have the option of clicking onto emails to see the details of the email in full extent.        
+        <br><br>If they click on search they will be redirected to a search page. In this search page users shall be able to search for an email based on the sender, subject, or date. If the search is successful they will be sent to a new page. On this page they will be displayed a set of options to perform on the email that was found. The options will include, reading the email, replying, forwarding, deleting, or translating the email.        
+        <br><br>In the trash page, users will be able to delete emails, based on the email they have chosen.       
+        <br><br>For both the aide menu and regular menu users will have the option to have the commands read to them again at any time by clicking the sound icon on the top right corner of the screen. They will be able to say their option choice and have the command performed. This was placed there because it will help users locate it easily. 
+        </p>
+</div>
+<script>
+    let stars= document.getElementById('stars');
+    let sun = document.getElementById('sun');
+    let mountain1 = document.getElementById('mountain1');
+    let text = document.getElementById('text');
+    let btn = document.getElementById('btn');
+    let mountain2 = document.getElementById('mountain2');
+    let header= document.querySelector('header');
+    window.addEventListener('scroll', function()
+    {
+        let value= window.scrollY;
+        stars.style.left= value * 0.25 + 'px';
+        sun.style.top= value * 1.05 + 'px';
+        sun.style.opacity= 1;
+        mountain1.style.top= value * 0.5 + 'px';
+        mountain2.style.top= value * 0 + 'px';
+        text.style.marginRight= value * 2 + 'px';
+        text.style.marginTop= value * 1.5 + 'px';
+        btn.style.marginTop= value * 1.5 + 'px';
+        header.style.top= value * 0.7 + 'px';
+    })
+</script>
+</body>
+</html>
