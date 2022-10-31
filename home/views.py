@@ -281,8 +281,3 @@ def compose_view(request):
 
     return render(request, 'home/compose.html', {'compose' : compose})
    
-def get_body(msg):
-    if msg.is_multipart():
-        return get_body(msg.get_payload(0))
-    else:
-        return msg.get_payload(None, True)
