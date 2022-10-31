@@ -32,12 +32,11 @@ attachment_dir = 'C:/Users/Britney/Desktop/'
 
 def texttospeech(text, filename):  #converts text to speech 
     filename = filename + '.mp3'
-    flag = True
-    while flag:
+    while True:
         try:
             tts = gTTS(text=text, lang='en', slow=False)
             tts.save(filename)
-            flag = False
+            break
         except:
             print('Trying again')
     playsound(filename)
@@ -95,7 +94,6 @@ def login_view(request):
         text1 = "Welcome to our Email Voice Assistant App, evoice. Login with your gmail account to continue. "
         texttospeech(text1, file + i)
         i = i + str(1)
-        '''
         flag = True
         while (flag):
             texttospeech("Enter your Email", file + i)
@@ -110,20 +108,18 @@ def login_view(request):
                     flag = False
             else:
                 texttospeech("could not understand what you meant:", file + i)
-                i = i + str(1)'''
-        addr = input("")
+                i = i + str(1)
         addr = addr.strip()
         addr = addr.replace(' ', '')
         addr = addr.lower()
         addr = convert_special_char(addr)
         print(addr)
         request.email = addr
-        '''
         flag = True
         while (flag):
             texttospeech("Enter your password", file + i)
             i = i + str(1)
-            passwrd = speechtotext(10)
+            passwrd = speechtotext(20)
             
             if addr != 'N':
                 texttospeech("You meant " + passwrd + " say yes to confirm or no to enter again", file + i)
@@ -133,8 +129,7 @@ def login_view(request):
                     flag = False
             else:
                 texttospeech("could not understand what you meant:", file + i)
-                i = i + str(1)'''
-        passwrd = input("")
+                i = i + str(1)
         passwrd = passwrd.strip()
         passwrd = passwrd.replace(' ', '')
         passwrd = passwrd.lower()
