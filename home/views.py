@@ -57,35 +57,35 @@ def speechtotext(duration):      #converst what the user says into text and stor
     return response
 
 def convert_special_char(text):  #takes words and makes sure they are converted into their character
-    temp=text
+    key=text
     special_chars = ['at','dot','underscore','dollar','hash','star','plus','minus','space','dash']
     for character in special_chars:
         while(True):
-            pos=temp.find(character)
+            pos=key.find(character)
             if pos == -1:
                 break
             else :
                 if character == 'at':
-                    temp=temp.replace('at','@')
+                    key=key.replace('at','@')
                 elif character == 'dot':
-                    temp=temp.replace('dot','.')
+                    key=key.replace('dot','.')
                 elif character == 'underscore':
-                    temp=temp.replace('underscore','_')
+                    key=key.replace('underscore','_')
                 elif character == 'dollar':
-                    temp=temp.replace('dollar','$')
+                    key=key.replace('dollar','$')
                 elif character == 'hash':
-                    temp=temp.replace('hash','#')
+                    key=key.replace('hash','#')
                 elif character == 'star':
-                    temp=temp.replace('star','*')
+                    key=key.replace('star','*')
                 elif character == 'plus':
-                    temp=temp.replace('plus','+')
+                    key=key.replace('plus','+')
                 elif character == 'minus':
-                    temp=temp.replace('minus','-')
+                    key=key.replace('minus','-')
                 elif character == 'space':
-                    temp = temp.replace('space', '')
+                    key = key.replace('space', '')
                 elif character == 'dash':
-                    temp=temp.replace('dash','-')
-    return temp
+                    key=key.replace('dash','-')
+    return key
 
 def login_view(request):
     global i, addr, passwrd 
