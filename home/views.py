@@ -280,4 +280,7 @@ def compose_view(request):
     compose.body = body
 
     return render(request, 'home/compose.html', {'compose' : compose})
+
+def home(request):
+    return render(request, 'home/homepage.html')
    
