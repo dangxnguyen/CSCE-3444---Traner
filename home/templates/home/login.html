@@ -37,7 +37,7 @@
                 <span></span>
                 <label>Password</label> 
             </div>
-            <a href="options.html">
+            <a href="options.html" onclick="SendPostRequestHomeType">
                 <input href="options.html" type="submit" value="Login" id="login">
             </a>
         </form>
@@ -61,6 +61,23 @@
 				}
 			});
 		}
+        function SendPostRequestHomeType(event){
+            $.ajax({
+                url: "{% url 'home:loginType' %}",
+                method: 'POST',
+                data: { 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                success: function (data) {
+                        
+                    if(data.result == 'success'){
+                            
+                        window.location = "{% url 'home:options' %}";
+                    }
+                    else if(data.result == 'failure'){
+                        window.location = "{% url 'home:login' %}";
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>

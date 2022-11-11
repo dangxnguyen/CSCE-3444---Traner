@@ -86,6 +86,37 @@ def convert_special_char(text):  #takes words and makes sure they are converted 
                 elif character == 'dash':
                     key=key.replace('dash','-')
     return key
+def login_type_view(request):
+    global i, addr, passwrd 
+
+    if request.method == 'POST':
+        addr = request.POST.get("email")
+        passwrd = request.POST.get("password")
+        print(addr, passwrd)
+        request.email = addr
+
+        imap_url = 'imap.gmail.com'
+        #passwrd = ''
+        #addr = ''
+        conn = imaplib.IMAP4_SSL(imap_url)
+        try:
+            conn.login(addr, 'vtdckeczbgddcwug')
+            #myyckrhcpkrkxagg
+            s.login(addr, 'vtdckeczbgddcwug')
+            texttospeech("Type Congratulations. You have logged in successfully. You will now be redirected to the menu page.", file + i)
+            i = i + str(1)
+            return redirect('/options/')
+            #return JsonResponse({'result' : 'success'})
+        except:
+            texttospeech("type Invalid Login Details. Please try again.", file + i)
+            i = i + str(1)
+            return redirect('/login.html/')
+
+    detail  = Details()
+    detail.email = addr
+    detail.password = passwrd
+    
+    #return render(request, 'home/login.html', {'detail' : detail}) 
 
 def login_view(request):
     global i, addr, passwrd 
@@ -141,8 +172,8 @@ def login_view(request):
         #addr = ''
         conn = imaplib.IMAP4_SSL(imap_url)
         try:
-            conn.login(addr, 'mfpwszyziwxifpsu')
-            s.login(addr, 'mfpwszyziwxifpsu')
+            conn.login(addr, 'vtdckeczbgddcwug')
+            s.login(addr, 'vtdckeczbgddcwug')
             texttospeech("Congratulations. You have logged in successfully. You will now be redirected to the menu page.", file + i)
             i = i + str(1)
             return JsonResponse({'result' : 'success'})
@@ -150,7 +181,6 @@ def login_view(request):
             texttospeech("Invalid Login Details. Please try again.", file + i)
             i = i + str(1)
             return JsonResponse({'result': 'failure'})
-
 
     detail  = Details()
     detail.email = addr
@@ -169,6 +199,7 @@ def options_view(request):
             say = speechtotext(3)
             if say == 'No' or say == 'no':
                 flag = False
+
         texttospeech("Enter your choice", file + i)
         i = i + str(1)
         act = speechtotext(5)
