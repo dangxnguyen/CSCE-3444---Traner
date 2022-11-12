@@ -212,11 +212,12 @@ def options_view(request):
             return JsonResponse({'result' : 'sent'})
         elif act == 'trash':
             return JsonResponse({'result' : 'trash'})
-        elif act == 'log out':
+        elif act == 'logout':
             addr = ""
             passwrd = ""
             texttospeech("You have been logged out of your account and now will be redirected back to the login page.",file + i)
             i = i + str(1)
+            #return redirect('/')
             return JsonResponse({'result': 'logout'})
         else:
             texttospeech("Invalid action. Please try again.", file + i)
@@ -313,5 +314,8 @@ def compose_view(request):
     return render(request, 'home/compose.html', {'compose' : compose})
 
 def home(request):
+    addr = ""
+    passwrd = ""
+
     return render(request, 'home/homepage.html')
    
