@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style3.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/compose.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Compose</title>
 </head>
    
-<body onkeydown=" WhichButtonCompose(event)">
+<body onkeydown = "SendPostRequestCompose(event)">
     <nav class="navbar">
         <label class="logo">My eVoice</label>
         <button class="logout-btn">Logout</button>
@@ -37,21 +38,21 @@
    </fieldset>
    </form>
    <script>
-	function WhichButtonCompose(event){
-		$.ajax({
-        url: "{% url 'home:compose' %}",
-        method: 'POST',
-        data: { 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-        success: function (data) {
-			if(data.result == 'success'){
-				window.location = "{% url 'home:options' %}";
-			}
-			else if(data.result == 'failure'){
-				window.location = "{% url 'home:compose' %}";
-			}
+        function SendPostRequestCompose(event){
+            $.ajax({
+            url: "{% url 'home:compose' %}",
+            method: 'POST',
+            data: { 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            success: function (data) {
+                if(data.result == 'success'){
+                    window.location = "{% url 'home:options' %}";
+                }
+                else if(data.result == 'failure'){
+                    window.location = "{% url 'home:compose' %}";
+                }
+            }
+        });
         }
-    });
-	}
-</script>
+    </script>
 </body>
 </html>

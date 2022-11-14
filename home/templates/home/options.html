@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/options.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Menu</title>
 </head>
-<body>
+
+<body onkeydown = "SendPostRequestOptions(event)">
     <div class="container">
         <div>
             <nav>
@@ -23,11 +25,17 @@
         </div>
         <div class="option">
             <a href="compose.html">
-                <button href="compose.html" class="btn" value="compose">Compose</button>
+                <button href="compose.html" class="btn" value="compose" type="submit">Compose</button>
             </a>
-            <button class="btn">Inbox</button>
-            <button class="btn">Search</button>
-            <button class="btn">Trash</button>
+            <a href="inbox.html">
+                <button href="inbox.html" class="btn" value="inbox" type="submit">Inbox</button>
+            </a>
+            <a href="sent.html">
+                <button href="sent.html" class="btn" value="inbox" type="submit">Sent</button>
+            </a>
+            <a href="trash.html">
+                <button href="trash.html" class="btn" value="inbox" type="submit">Trash</button>
+            </a>
         </div>
     </div>
     <script>
@@ -40,6 +48,15 @@
                 if(data.result == 'compose'){
                     window.location = "{% url 'home:compose' %}";
                 } 
+                else if(data.result == 'inbox'){
+                    window.location = "{% url 'home:inbox' %}";
+                }
+                else if(data.result == 'sent'){
+                    window.location = "{% url 'home:sent' %}";
+                }
+                else if(data.result == 'trash'){
+                    window.location = "{% url 'home:trash' %}";
+                }
                 else if(data.result == 'failure'){
                     window.location = "{% url 'home:options' %}";
                 }

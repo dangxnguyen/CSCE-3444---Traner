@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sent.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Sent</title>
+</head>
+<body onkeydown = "SendPostRequestTrash(event)">
+    <div class="container">
+        <div>
+            <nav>
+                <label class="logo">My eVoice</label>
+                <button class="logout-btn">Logout</button>
+            </nav>
+        </div>
+        <div>
+            <h1>Sent Folder</h1>
+        </div>
+        <div class="option">
+            <button href="inbox.html" class="btn">Search</button>
+            <button href="options.html" class="btn">Back</button>
+        </div>
+    </div>
+
+    <script>
+        function SendPostRequestTrash(event) {
+            $.ajax({
+                url: "{%url 'home:sent' %}",
+                method: 'POST',
+                data: { 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                success: function(data) {
+                    if (data.result == 'success') {
+                        window.location = "{% url 'home:options' %}";
+                    }
+                    else if (data.result == 'logout') {
+                        window.location = "{% url 'home:login' %}"
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
