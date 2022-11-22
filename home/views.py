@@ -25,7 +25,9 @@ item =""
 subject = ""
 body = ""
 s = smtplib.SMTP('smtp.gmail.com', 587)
+s.ehlo()
 s.starttls()
+s.ehlo()
 imap_url = 'imap.gmail.com'
 conn = imaplib.IMAP4_SSL(imap_url)
 attachment_dir = 'C:/Users/Britney/Desktop/'
@@ -108,14 +110,16 @@ def login_type_view(request):
         conn = imaplib.IMAP4_SSL(imap_url)
         try:
             conn.login(addr, 'vuzaialuwrljbxit')
+            #conn.login(addr, 'lpohepufhxyeoslv')
             #myyckrhcpkrkxagg
             s.login(addr, 'vuzaialuwrljbxit')
-            texttospeech("Type Congratulations. You have logged in successfully. You will now be redirected to the menu page.", file + i)
+            #s.login(addr, 'lpohepufhxyeoslv')
+            texttospeech("Congratulations. You have logged in successfully. You will now be redirected to the menu page.", file + i)
             i = i + str(1)
             return redirect('/options/')
             #return JsonResponse({'result' : 'success'})
         except:
-            texttospeech("type Invalid Login Details. Please try again.", file + i)
+            texttospeech("Invalid Login Details. Please try again.", file + i)
             i = i + str(1)
             return redirect('/login.html/')
 
@@ -752,3 +756,40 @@ def trash_view(request):
         return JsonResponse({'result': 'success'})
     elif request.method == 'GET':
         return render(request, 'home/trash.html')
+
+def compose_type_view(request):
+    global i, addr, passwrd, s, item, subject, body
+
+    if request.method == 'POST':
+        fromaddr = addr
+        toaddr = list()
+
+        item = request.POST.get("receiver")
+        subject = request.POST.get("subject")
+        body = request.POST.get("body")
+
+        newtoaddr = list()
+        newtoaddr.append(item)
+        msg = MIMEMultipart()
+        msg['From'] = fromaddr
+        msg['To'] = ",".join(newtoaddr)
+        msg['Subject'] = subject
+        msg.attach(MIMEText(body, 'plain'))
+
+        try:
+            s.sendmail(fromaddr, newtoaddr, msg.as_string())
+            texttospeech("Your email has been sent successfully. You will now be redirected to the menu page.", file + i)
+            i = i + str(1)
+        except:
+            texttospeech("Sorry, your email failed to send. please try again. You will now be redirected to the the compose page again.", file + i)
+            i = i + str(1)
+            #return JsonResponse({'result': 'failure'})
+            return redirect('/compose/')
+        s.quit()
+
+        return redirect('/options/')
+
+    compose  = Compose()
+    compose.recipient = item
+    compose.subject = subject
+    compose.body = body

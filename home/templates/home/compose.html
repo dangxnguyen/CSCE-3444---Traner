@@ -10,14 +10,14 @@
     <title>Compose</title>
 </head>
    
-<body onkeydown = "SendPostRequestCompose(event)">
+<body>
     <nav class="navbar">
         <label class="logo">My eVoice</label>
         <a href="/">
             <button href="/" class="logout-btn" value="logout">Logout</button>
         </a>
     </nav> 
-   <form id="here">
+    <form action="home/compose.html" method="POST">
     <script> 
         $(document).ready(function(){
         setInterval(function(){
@@ -26,17 +26,18 @@
         });
         </script>
         {% csrf_token %}
+    
       <fieldset>
          <legend>Compose Email</legend>
             <label for="email">To:</label>
-            <input type="text" placeholder="johndoe@gmail.com" class="no-outline" id="email" required value="{{compose.recipient}}" height="70"><br /><br />
+            <input type="text" name="receiver" placeholder="johndoe@gmail.com" class="no-outline" id="email" required value="{{compose.recipient}}" height="70"><br /><br />
             <label>Subject:</label>
-            <input type="text" placeholder="default text" class="no-outline" id="subject" required value="{{compose.subject}}"><br/><br />
+            <input type="text" name="subject" placeholder="default text" class="no-outline" id="subject" required value="{{compose.subject}}"><br/><br />
             <label>Message:</label>
-            <input type="text" placeholder="default text" id="body" required value ="{{compose.body}}"><br/><br/>
+            <input type="text" name="body" placeholder="default text" id="body" required value ="{{compose.body}}"><br/><br/>
       
             <input type="submit" id="send" value="Send">
-         
+            <button onclick="SendPostRequestCompose()"> Click for sound </button>
    </fieldset>
    </form>
    <script>
