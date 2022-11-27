@@ -29,13 +29,15 @@
     
       <fieldset>
          <legend>Compose Email</legend>
-            <label for="email">To:</label>
+            <label for="email"> To:
             <input type="text" name="receiver" placeholder="johndoe@gmail.com" class="no-outline" id="email" required value="{{compose.recipient}}" height="70"><br /><br />
-            <label>Subject:</label>
+            </label>
+            <label for="subject"> Subject:
             <input type="text" name="subject" placeholder="default text" class="no-outline" id="subject" required value="{{compose.subject}}"><br/><br />
-            <label>Message:</label>
+            </label>
+            <label for="body"> Message:
             <input type="text" name="body" placeholder="default text" id="body" required value ="{{compose.body}}"><br/><br/>
-      
+            </label>
             <input type="submit" id="send" value="Send">
             <button onclick="SendPostRequestCompose()"> Click for sound </button>
    </fieldset>
